@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Tugas Pertemuan 11 | Array</title>
+<style>
+    .container{
+        margin: auto;
+        width: 500px;
+        height: 1200px;
+        border: transparent;
+        }
+    #coba1{
+        width: 450px;
+        height: auto;
+        margin: auto;
+        padding: 10px;
+        border-style:solid;
+        border-radius: 5px;
+        }
+    #coba2{
+        width: 450px;
+        height: auto;
+        margin: auto;
+        padding: 10px;
+        border-style:solid;
+        border-radius: 5px;
+        }
+    .no1{
+        width: 450px;
+        height: 100px;
+        margin: auto;
+        padding: 10px;
+        border-style: solid;
+        background-color: turquoise;
+        }
+    .no2{
+        width: 450px;
+        height: 100px;
+        border-style:solid;
+        margin: auto;
+        padding: 10px;
+        background-color: turquoise;
+        }
+    button{
+        color: white;
+        left: 50%;
+        border-radius: 20px;
+        background-color: blue;
+        }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;font-family: Verdana;">LATIHAN SOAL ARRAY</h2>
+        <p class="no1">1) Hitung Z = 2x + 15x<br>dengan nilai X : angka genap dari 10 s/d 50</p>
+    <div>
+        <p id ="coba1"></p>
+        <button type="button" onclick="soal1()">Mulai!</button><br>
+    </div><hr>
+        <p class="no2">2)Buat fungsi untuk menampilkan angka bulat acak dari a s/d b. data acak disimpan di array<br>3) Lakukan perhitungan : min, max, mean,modus, median</p>
+    <div id ="coba2">
+        <p>2) Angka Acak dari a s/d b dan ditampung di Array</p>
+            a : <input type="number" id="a"><br>
+            b : <input type="number" id="b">
+        <p>Array : </p>
+        <p name="result" id="result"></p><hr>
+        <p>3) Output Min,Max,Mean,Modus,Median</p>
+            <p name="result" id="min"></p>
+            <p name="result" id="max"></p>
+            <p name="result" id="mean"></p>
+            <p name="result" id="modus"></p>
+            <p name="result" id="tengah"></p>
+            <button onclick="soal2dan3()">Mulai !</button><br>
+    </div>
+    <p align="center">Nama : Dicky Ardianto | NIM : 200411100064</p>
+<script>
+    function soal1(){
+        var hasil = [];
+        for(var x = 10; x <= 50 ; x+= 2){
+            proses =(2*x) + (15*x) +"<br>"
+            hasil.push(proses)
+            }
+            document.getElementById("coba1").innerHTML = hasil.join("\n")
+            }
+    function soal2dan3(){
+        var a = document.getElementById("a").value
+        var b = document.getElementById("b").value
+        var hasil = []
+        var cek = b - a
+        if(cek > 20){
+            for(i = 0;i < 20;i+=1){
+                add = Math.floor(Math.random() * Number(b)) + Number(a)
+                hasil.push(add)
+                }
+            }
+            else{
+                hasil.push("Selisih data a dan b tidak sampai 20")
+            }
+            document.getElementById("result").innerHTML = hasil.join(",")
+            document.getElementById("min").innerHTML="Min = " +Math.min(...hasil);
+            document.getElementById("max").innerHTML ="Max = " +Math.max(...hasil);
+            var jumlah = hasil.reduce(function(x, y){return x + y;}, 0);
+            var panjang = hasil.length
+            var mean = jumlah/panjang
+            document.getElementById("mean").innerHTML = "Mean = "+mean
+            function mode(hasil){
+                if(hasil.length == 0)
+                return null;
+
+                var modeMap = {};
+                var maxEl = hasil[0], maxCount = 1;
+                for(var i = 0; i < hasil.length; i++)
+                {
+                    var el = hasil[i];
+                    if(modeMap[el] == null)
+                        modeMap[el] = 1;
+                    else
+                        modeMap[el]++;  
+                    if(modeMap[el] > maxCount)
+                        {
+                            maxEl = el;
+                            maxCount = modeMap[el];
+                        }
+                    }
+                    return maxEl;
+                }
+                document.getElementById("modus").innerHTML = "Modus = " + (mode(hasil))
+                var median = panjang/2
+                var hasilmedian = (hasil[median-1]+hasil[median])/2
+                document.getElementById("tengah").innerHTML = "Median = " + hasilmedian
+            }
+</script>
+</body>
+</html>
